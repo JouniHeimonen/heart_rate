@@ -1,10 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
+
+  const [age, setAge] = useState('')
+  const [lower, setLower] = useState('')
+  const [upper, setUpper] = useState('')
+
+
+const heartrate = () => {
+  const heartlower = (220-age) * 0.65
+  setLower(heartlower)
+  const heartupper = (220-age) * 0.85
+  setUpper(heartupper)
+ 
+}
+  
+
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>age</Text>
+      <TextInput keyboardType='decimal-pad'
+      value={age}
+      onChangeText={text => setAge(text)}/>
+      <Text> HR limits</Text>
+      <TextInput>{lower}-{upper}</TextInput>
+      <Button onPress={heartrate} title ='calculate'></Button>
       <StatusBar style="auto" />
     </View>
   );
